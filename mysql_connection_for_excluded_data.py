@@ -23,9 +23,9 @@ def connect_to_db():
         conn = mysql.connector.connect(
             host="localhost", 
             port=3306, 
-            user="slideteam", 
-            password="slideteam", 
-            database="customer_data"
+            user="username", 
+            password="password", 
+            database="db_name"
         )
         logging.info("Database connection established successfully.")
         return conn
@@ -36,7 +36,7 @@ def connect_to_db():
 # Function to check if the email exists in the database
 def email_exists_in_db(cursor, email):
     try:
-        query = "SELECT COUNT(*) FROM user_data_excluded WHERE Email = %s"
+        query = "SELECT COUNT(*) FROM table_name WHERE Email = %s"
         cursor.execute(query, (email,))
         count = cursor.fetchone()[0]
         return count > 0
@@ -128,7 +128,7 @@ def insert_data_from_file(df):
         # SQL query to insert the data into the database
         insert_query = """
         INSERT INTO 
-user_data_excluded (Name, Email, Account_Timestamp, No_Of_Downloads, Download_URLs, Visited_URLs, Free_or_Paid)
+table_name (Name, Email, Account_Timestamp, No_Of_Downloads, Download_URLs, Visited_URLs, Free_or_Paid)
         VALUES (%s, %s, %s, %s, %s, %s, %s)
         """
 
